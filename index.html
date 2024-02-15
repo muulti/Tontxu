@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <style>
+        h1{color: blueviolet;
+        size: 200px;}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el número</title>
+</head>
+<body>
+    <h1>Mi numero es: 68_71_61_</h1>
+    <p>Tendras que comprobar y verificar la combinacion correcta de las 1000 posibles :D</p>
+    <input type="text" id="numeroInput">
+    <button onclick="verificarNumero()">Verificar</button>
+    
+    <p id="mensaje"></p>
+
+    <script>
+        function obtenerFechaDesdeInternet(callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        var fecha = new Date(response.datetime);
+                        var fechaActual = fecha.toDateString();
+                        console.log("Fecha actual obtenida desde Internet:", fechaActual);
+                        callback(fechaActual);
+                    } else {
+                        console.error("Error al obtener la fecha desde Internet. Código de estado:", xhr.status);
+                        callback(null);
+                    }
+                }
+            };
+            xhr.open("GET", "https://worldtimeapi.org/api/ip", true);
+            xhr.send();
+        }
+
+        function verificarNumero() {
+            obtenerFechaDesdeInternet(function(fechaActual) {
+                var numero = document.getElementById("numeroInput").value;
+                var numeroStr=numero.toString();
+                var correctDigits=0; 
+
+                if (numero.length !== 3 || isNaN(numero)) {
+                    document.getElementById("mensaje").innerText = "Por favor, introduce un número de 3 dígitos.";
+                } else {
+                    if (numeroStr[0]=="8"){correctDigits=correctDigits+1;}
+                    if (numeroStr[1]=="4"){correctDigits=correctDigits+1;}
+                    if (numeroStr[2]=="4"){correctDigits=correctDigits+1;}
+                    if (fechaActual === null) {
+                        document.getElementById("mensaje").innerText = "Error al obtener la fecha desde Internet. Inténtalo de nuevo más tarde.";
+                    } else {
+                        var ultimoIntento = localStorage.getItem("ultimoIntento");
+                        if (ultimoIntento === fechaActual) {
+                            document.getElementById("mensaje").innerText = "Solo puedes intentar una vez al día.";
+                        } else {
+                            var numeroCorrecto = "844"; // Este sería el número correcto
+                            if (numero === numeroCorrecto) {
+                                document.getElementById("mensaje").innerText = "¡Correcto! Has adivinado el número.";
+                            } else {
+                                document.getElementById("mensaje").innerText = "Lo siento, ese no es el número correcto. Inténtalo de nuevo.";
+                                document.getElementById("mensaje").innerText = correctDigits.toString()+" digitos acertados";
+                            }
+                            localStorage.setItem("ultimoIntento", fechaActual);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
