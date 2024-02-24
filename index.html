@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adivina el número</title>
 </head>
-<body onload="generarDatosCuriosos()">
+<body>
     <h1>Mi numero es: 68_71_61_</h1>
     <p>Tendras que comprobar y verificar la combinacion correcta de las 1000 posibles :D</p>
     <input type="text" id="numeroInput">
@@ -44,6 +44,10 @@
             xhr.open("GET", "https://worldtimeapi.org/api/ip", true);
             xhr.send();
         }
+
+
+        document.addEventListner("load",generarDatosCurisos());
+        
         function generarDatosCuriosos() {
             var indicedd =1;
     var datosCuriosos = [
@@ -83,9 +87,8 @@
         
 
         function verificarNumero() {
-            if (indicedd===28){indicedd=1;}
-            indicedd=indicedd+1;
-            document.getElementById("datoCurioso").innerText=datosCuriosos[indicedd];
+            
+
             obtenerFechaDesdeInternet(function(fechaActual) {
                 var numero = document.getElementById("numeroInput").value;
                 var numeroStr=numero.toString();
