@@ -22,7 +22,6 @@
     <button onclick="verificarNumero()">Verificar</button>
     
     <p id="mensaje"></p>
-     <p id="datoCurioso"></p> <!-- Elemento HTML donde se mostrará el dato curioso -->
 
     <script>
         function obtenerFechaDesdeInternet(callback) {
@@ -45,50 +44,7 @@
             xhr.send();
         }
 
-
-        document.addEventListner("load",generarDatosCurisos());
-        
-        function generarDatosCuriosos() {
-            var indicedd =1;
-    var datosCuriosos = [
-        "Los gatos tienen 32 músculos en cada oreja.",
-        "La letra 'A' no aparece en ningún número escrito en inglés hasta llegar al mil.",
-        "Las huellas de nariz de cada ser humano son únicas.",
-        "Los astronautas no pueden eructar en el espacio debido a la gravedad cero.",
-        "Las manzanas flotan en el agua porque el 25% de su volumen es aire.",
-        "La miel nunca caduca.",
-        "La luz tarda aproximadamente 8 minutos y 20 segundos en llegar desde el Sol hasta la Tierra.",
-        "El ojo humano es tan sensible que puede detectar una llama a una distancia de 1.6 km en la oscuridad.",
-        "El elefante es el único mamífero que no puede saltar.",
-        "El corazón humano produce suficiente energía para conducir un automóvil a 32 km de distancia.",
-        "Los camaleones pueden mover sus ojos en direcciones diferentes al mismo tiempo.",
-        "Los pingüinos tienen glándulas especiales en la cabeza que les permiten beber agua salada.",
-        "Un estornudo viaja a una velocidad de aproximadamente 160 km/h.",
-        "El sonido más fuerte producido por cualquier animal es de 188 decibelios. Pertenece al cachalote.",
-        "El agujero más grande del mundo hecho por un mamífero es la madriguera del oso perezoso.",
-        "Las abejas tienen cinco ojos: dos compuestos y tres simples.",
-        "El koala duerme un promedio de 22 horas al día.",
-        "Los camiones llevan suficiente gasolina en el tanque para llegar aproximadamente a la luna.",
-        "El pingüino emperador puede sumergirse a una profundidad de 550 metros en busca de comida.",
-        "El avestruz puede correr a una velocidad de hasta 70 km/h.",
-        "Las jirafas tienen la misma cantidad de vértebras en el cuello que los humanos.",
-        "Los pulpos tienen tres corazones.",
-        "El cerebro humano tiene la capacidad de almacenar 4 terabytes de información.",
-        "El músculo más fuerte del cuerpo humano es la lengua.",
-        "La cucaracha puede vivir hasta una semana sin su cabeza.",
-        "La luna se está alejando de la Tierra a una velocidad de aproximadamente 3.8 cm por año.",
-        "El diamante es la sustancia más dura conocida en la Tierra.",
-        "El insecto más grande del mundo es el escarabajo Hércules, que puede crecer hasta 17 cm de largo.",
-        "El corazón del colibrí late hasta 1,260 veces por minuto.",
-        "El panda gigante puede comer hasta 12 horas al día, consumiendo hasta 12 kg de bambú."
-    ];
-            document.getElementById("datoCurioso").innerText=datosCuriosos[indicedd];
-        }
-        
-
         function verificarNumero() {
-            
-
             obtenerFechaDesdeInternet(function(fechaActual) {
                 var numero = document.getElementById("numeroInput").value;
                 var numeroStr=numero.toString();
